@@ -41,6 +41,7 @@ def health_check():
         return response
     
     try:
+        raise Exception("Exception occurred while checking health")
         new_check = HealthCheck()
         db.session.add(new_check)
         db.session.commit()
