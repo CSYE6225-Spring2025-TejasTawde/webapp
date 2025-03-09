@@ -4,6 +4,10 @@ packer {
       version = ">= 1.0.0, < 2.0.0"
       source  = "github.com/hashicorp/amazon"
     }
+    googlecompute = {
+      source  = "github.com/hashicorp/googlecompute"
+      version = "~> 1"
+    }
   }
 }
 
@@ -61,6 +65,50 @@ variable "demo_account_id" {
   default = "980921734991"
 }
 
+variable "gcp_project_id" {
+  type    = string
+  default = "devproject-452020"
+}
+
+variable "gcp_region" {
+  type    = string
+  default = "us-central1"
+}
+
+variable "gcp_zone" {
+  type    = string
+  default = "us-central1-a"
+}
+
+variable "gcp_machine_type" {
+  type    = string
+  default = "e2-micro"
+}
+
+variable "gcp_source_image_family" {
+  type    = string
+  default = "ubuntu-2404-lts"
+}
+
+variable "gcp_source_image_project" {
+  type    = string
+  default = "ubuntu-os-cloud"
+}
+
+variable "gcp_image_name" {
+  type    = string
+  default = "csye6225-webapp-gcp"
+}
+
+variable "gcp_image_description" {
+  type    = string
+  default = "CSYE6225 Webapp GCP Image"
+}
+
+variable "gcp_credentials_file" {
+  type = string
+}
+
 source "amazon-ebs" "webapp-ami" {
   profile         = "${var.aws_profile}"
   region          = "${var.region}"
@@ -90,10 +138,31 @@ source "amazon-ebs" "webapp-ami" {
 }
 
 
+source "googlecompute" "webapp-image" {
+  project_id          = var.gcp_project_id
+  source_image        = "ubuntu-2404-noble-amd64-v20250214"
+  source_image_family = "ubuntu-2404-noble-amd64"
+  credentials_file    = var.gcp_credentials_file
+  region              = var.gcp_region
+  zone                = var.gcp_zone
+  machine_type        = "n1-standard-1"
+  disk_size           = 10
+  disk_type           = "pd-standard"
+  network             = "default"
+  tags                = ["csye6225"]
+
+  image_name              = var.gcp_image_name
+  image_family            = "my-custom-ami"
+  image_description       = "Custom Ubuntu 24.04 server image"
+  image_storage_locations = ["us"]
+  ssh_username            = var.ssh_username
+}
+
 
 build {
   sources = [
     "source.amazon-ebs.webapp-ami",
+    "source.googlecompute.webapp-image",
   ]
 
   provisioner "file" {
