@@ -82,27 +82,38 @@ variable "gcp_zone" {
 
 variable "gcp_machine_type" {
   type    = string
-  default = "e2-micro"
+  default = "n1-standard-1"
+}
+
+variable "gcp_source_image" {
+  type    = string
+  default = "ubuntu-2404-noble-amd64-v20250214"
 }
 
 variable "gcp_source_image_family" {
   type    = string
-  default = "ubuntu-2404-lts"
+  default = "ubuntu-2404-noble-amd64"
 }
 
-variable "gcp_source_image_project" {
-  type    = string
-  default = "ubuntu-os-cloud"
-}
 
 variable "gcp_image_name" {
   type    = string
   default = "csye6225-webapp-gcp"
 }
 
-variable "gcp_image_description" {
+variable "gcp_image_family" {
   type    = string
-  default = "CSYE6225 Webapp GCP Image"
+  default = "gcp-webapp-image"
+}
+
+variable "gcp_disk_type" {
+  type    = string
+  default = "pd-standard"
+}
+
+variable "gcp_network" {
+  type    = string
+  default = "default"
 }
 
 variable "gcp_credentials_file" {
@@ -139,23 +150,22 @@ source "amazon-ebs" "webapp-ami" {
 
 
 source "googlecompute" "webapp-image" {
-  project_id          = var.gcp_project_id
-  source_image        = "ubuntu-2404-noble-amd64-v20250214"
-  source_image_family = "ubuntu-2404-noble-amd64"
-  credentials_file    = var.gcp_credentials_file
-  region              = var.gcp_region
-  zone                = var.gcp_zone
-  machine_type        = "n1-standard-1"
-  disk_size           = 10
-  disk_type           = "pd-standard"
-  network             = "default"
-  tags                = ["csye6225"]
-
-  image_name              = var.gcp_image_name
-  image_family            = "my-custom-ami"
-  image_description       = "Custom Ubuntu 24.04 server image"
+  project_id              = "${var.gcp_project_id}"
+  source_image            = "${var.gcp_source_image}"
+  source_image_family     = "${var.gcp_source_image_family}"
+  credentials_file        = "${var.gcp_credentials_file}"
+  region                  = "${var.gcp_region}"
+  zone                    = "${var.gcp_zone}"
+  machine_type            = "${var.gcp_machine_type}"
+  disk_size               = 10
+  disk_type               = "${var.gcp_disk_type}"
+  network                 = "${var.gcp_network}"
+  tags                    = ["csye6225"]
+  image_name              = "${var.gcp_image_name}"
+  image_family            = "${var.gcp_image_family}"
+  image_description       = "WebApp Ubuntu 24.04 server image"
   image_storage_locations = ["us"]
-  ssh_username            = var.ssh_username
+  ssh_username            = "${var.ssh_username}"
 }
 
 
