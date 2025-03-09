@@ -29,11 +29,12 @@ jobs:
       - name: Run packer validate
         id: packer-validate
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ vars.AWS_REGION }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
+          set -x
           export PACKER_LOG=1
           echo "${{ secrets.GCP_CREDENTIALS }}" > /tmp/gcp-credentials.json
           packer init packer/webapp.pkr.hcl
