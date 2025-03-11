@@ -135,7 +135,7 @@ source "amazon-ebs" "webapp-ami" {
     var.demo_account_id,
   ]
 
-  instance_type = "${var.instance_type}"
+    instance_type = "${var.instance_type}"
   source_ami    = "${var.source_ami}"
   ssh_username  = "${var.ssh_username}"
   subnet_id     = "${var.subnet_id}"
