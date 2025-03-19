@@ -4,10 +4,10 @@ packer {
       version = ">= 1.0.0, < 2.0.0"
       source  = "github.com/hashicorp/amazon"
     }
-    googlecompute = {
-      source  = "github.com/hashicorp/googlecompute"
-      version = "~> 1"
-    }
+    # googlecompute = {
+    #   source  = "github.com/hashicorp/googlecompute"
+    #   version = "~> 1"
+    # }
   }
 }
 
@@ -41,19 +41,19 @@ variable "ssh_username" {
   default = "ubuntu"
 }
 
-variable "db_name" {
-  type    = string
-  default = "webapp"
-}
+# variable "db_name" {
+#   type    = string
+#   default = "webapp"
+# }
 
-variable "db_user" {
-  type    = string
-  default = "tejas"
-}
+# variable "db_user" {
+#   type    = string
+#   default = "tejas"
+# }
 
-variable "db_password" {
-  type = string
-}
+# variable "db_password" {
+#   type = string
+# }
 
 variable "dev_account_id" {
   type    = string
