@@ -36,7 +36,5 @@ jobs:
           # GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         run: |
           export PACKER_LOG=1
-          # echo '${{ secrets.GCP_CREDENTIALS }}' > /tmp/gcp-credentials.json
           packer init packer/webapp.pkr.hcl
-          # packer validate -var "db_password=${{ secrets.DB_PASSWORD }}" -var "gcp_credentials_file=/tmp/gcp-credentials.json" packer/webapp.pkr.hcl || (echo "Packer validation failed, please fix the errors." && exit 1)
           packer validate packer/webapp.pkr.hcl || (echo "Packer validation failed, please fix the errors." && exit 1)

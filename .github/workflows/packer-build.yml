@@ -117,10 +117,8 @@ jobs:
           PACKER_LOG: 1
           PACKER_LOG_PATH: "packer.log"
         run: |
-          # echo '${{ secrets.GCP_CREDENTIALS }}' > /tmp/gcp-credentials.json
           packer init packer/webapp.pkr.hcl
-          # packer build -var "gcp_credentials_file=/tmp/gcp-credentials.json" -var "db_password=${{ secrets.DB_PASSWORD }}" packer/webapp.pkr.hcl | tee packer-output.log
-          packer build packer/webapp.pkr.hcl | tee packer-output.log
+          packer build packer/webapp.pkr.hcl
 
       # - name: Extract GCP Image Name
       #   run: |
