@@ -255,7 +255,7 @@ build {
       "sudo cp -r /tmp/webapp/* /opt/csye6225/webapp/",
       "echo 'Changing ownership of /opt/csye6225/webapp directory...'",
       "sudo chown -R $(whoami):$(whoami) /opt/csye6225/webapp",
-      "echo 'Adding appropriate permissions to directories'", 
+      "echo 'Adding appropriate permissions to directories'",
       "sudo chmod -R 755 /opt/venv",
       "sudo chmod -R 755 /opt/csye6225/webapp",
     ]
