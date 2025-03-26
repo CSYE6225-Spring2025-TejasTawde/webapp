@@ -52,7 +52,7 @@ db = SQLAlchemy(app)
 log_group = os.getenv('CLOUDWATCH_LOG_GROUP', 'webapp-logs')
 log_stream = os.getenv('CLOUDWATCH_LOG_STREAM', 'app-logs')
 
-# Set up logging with JSON formatter
+# Set up logging
 logger = logging.getLogger('webapp')
 logger.setLevel(logging.INFO)
 json_formatter = JsonFormatter()
