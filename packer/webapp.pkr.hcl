@@ -249,7 +249,7 @@ build {
       "echo 'Activating virtual environment'",
       ". /opt/venv/bin/activate",
       "echo 'Installing Python packages'",
-      "/opt/venv/bin/pip install Flask Flask-SQLAlchemy SQLAlchemy mysqlclient Werkzeug pytest boto3 watchtower statsd",
+      "/opt/venv/bin/pip install Flask Flask-SQLAlchemy SQLAlchemy mysqlclient Werkzeug pytest boto3 watchtower statsd json",
       "echo 'Copying webapp contents to /opt/csye6225'",
       "sudo mkdir -p /opt/csye6225/webapp",
       "sudo cp -r /tmp/webapp/* /opt/csye6225/webapp/",
