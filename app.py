@@ -44,7 +44,8 @@ else:
     db_password = os.getenv('DB_PASSWORD')
     db_host = os.getenv('DB_HOST', 'localhost')
     db_name = os.getenv('DB_NAME', 'webapp')
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_username}:{db_password}@{db_host}/{db_name}'
+    db_port = int(os.getenv('DB_PORT', 3306))
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_name}'
 
 db = SQLAlchemy(app)
 
